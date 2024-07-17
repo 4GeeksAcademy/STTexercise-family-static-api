@@ -17,17 +17,22 @@ class FamilyStructure:
 
     # read-only: Use this method to generate random members ID's when adding members into the list
     def _generateId(self):
-        return randint(0, 99999999)
+        return randint(10000, 99999)
 
     def add_member(self, member):
         # fill this method and update the return
-        new_member={
-            "id": self._generateId(),
-            "last_name":self.last_name,
-            "first_name":member["first_name"],
-            "age":member["age"],
-            "lucky_numbers":member["lucky_numbers"]
+        member_id = member.get("id")
+        if member_id is None:
+            member_id = self._generateId()
+
+        new_member = {
+            "id": member_id,
+            "last_name": self.last_name,
+            "first_name": member["first_name"],
+            "age": member["age"],
+            "lucky_numbers": member["lucky_numbers"]
         }
+
         self._members.append(new_member)
         return(member)
 
@@ -50,3 +55,6 @@ class FamilyStructure:
     # this method is done, it returns a list with all the family members
     def get_all_members(self):
         return self._members
+    
+
+jackson_family = FamilyStructure("Jackson")

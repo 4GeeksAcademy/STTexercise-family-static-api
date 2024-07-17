@@ -38,11 +38,10 @@ def handle_hello():
 @app.route('/members', methods=['POST'])
 def add_members():
     data = request.get_json()
-    print(data)
-    new_member = jackson_family.add_member(data)
-    print(new_member)
-
+    if not data:
+        return jsonify({"error": "No data provided"}), 400
     
+    new_member = jackson_family.add_member(data)
     return jsonify(new_member), 200
     
 @app.route('/members/<int:member_id>', methods=['DELETE'])
