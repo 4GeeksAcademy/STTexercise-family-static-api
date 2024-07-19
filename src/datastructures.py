@@ -13,7 +13,26 @@ class FamilyStructure:
         self.last_name = last_name
 
         # example list of members
-        self._members = []
+        self._members = [
+            {
+            'id':1,
+            'first_name':'John Jackson' ,
+            'age': 33,
+            'Lucky Numbers':[7, 13, 22]
+            },
+            {
+            'id':2,
+            'first_name':'Jane Jackson' ,
+            'age': 35,
+            'Lucky Numbers':[10, 14, 3]
+            },
+            {
+            'id':3,
+            'first_name':'Jimmy Jackson',
+            'age': 5,
+            'Lucky Numbers': [1]
+            }   
+        ]
 
     # read-only: Use this method to generate random members ID's when adding members into the list
     def _generateId(self):
@@ -21,12 +40,12 @@ class FamilyStructure:
 
     def add_member(self, member):
         # fill this method and update the return
-        member_id = member.get("id")
-        if member_id is None:
-            member_id = self._generateId()
+
+        if "id" not in member:
+            member["id"] = self._generateId()
 
         new_member = {
-            "id": member_id,
+            "id": member["id"],
             "last_name": self.last_name,
             "first_name": member["first_name"],
             "age": member["age"],
@@ -37,20 +56,22 @@ class FamilyStructure:
         return(member)
 
     def delete_member(self, id):
+        output = {'done': False}
         # fill this method and update the return
         for member in self._members:
             if member["id"] == id:
                 self._members.remove(member)
-                return {"done": True}
-        return {"done": False}
+                output = {'done': True}
+        print(output)
+        return output 
 
     def get_member(self, id):
+        found_member = None
         # fill this method and update the return
         for member in self._members:
             if member["id"] == id:
-                return member, {"done": True}
-            else:
-                return {"done": False}
+                return member
+        return found_member  
 
     # this method is done, it returns a list with all the family members
     def get_all_members(self):
