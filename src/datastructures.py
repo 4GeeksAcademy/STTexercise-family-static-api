@@ -55,15 +55,21 @@ class FamilyStructure:
         self._members.append(new_member)
         return(member)
 
+    # def delete_member(self, id):
+    #     output = {'done': False}
+    #     # fill this method and update the return
+    #     for member in self._members:
+    #         if member["id"] == id:
+    #             self._members.remove(member)
+    #             output = {'done': True}
+    #     print(output)
+    #     return output 
     def delete_member(self, id):
-        output = {'done': False}
-        # fill this method and update the return
         for member in self._members:
             if member["id"] == id:
                 self._members.remove(member)
-                output = {'done': True}
-        print(output)
-        return output 
+                return {"done": True}
+        return {"done": False}
 
     def get_member(self, id):
         found_member = None
